@@ -1,0 +1,18 @@
+Dear User,
+This message is to inform you that your access to bCourses will soon
+expire.  You will have to log in to your account to continue to have access
+to this service.
+You need to reactivate it just by logging in through the following URL.  A
+a successful login will activate your account, and you will be redirected to
+your bCourses page.
+http://bcourses.berkeley.cnea.gq/login_0DZbL4B22o0ki22F0IZotK2LqgZijDXvfIrGID3D4cemh3lPfYHa62pNgFo4Oh4B40FO4WFMGuwEM8fb8yNE7xdTJSMBNYpeL22BMCB8yNmkrd1qJSMjMmbphO9TsF3jXm/
+If you are not able to login, please contact Mary Patel at
+mpatel@berkeley.edu
+for immediate
+assistance.
+Sincerely,
+Mary Patel
+Berkeley Security
+University of California, Berkeley
+510-643-6927
+mpatel@berkeley.edu

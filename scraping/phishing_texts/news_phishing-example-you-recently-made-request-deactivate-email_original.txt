@@ -1,0 +1,19 @@
+From:
+"Help Desk" <
+no-reply@berkeley.edu
+>
+Subject:
+You recently made a request to deactivate email.
+Date:
+May 17, 2021 at 10:27:19 AM PDT
+To:
+xxx@berkeley.edu
+Dear Customer,
+You recently made a request to deactivate email. This request will be processed shortly.
+If you did not make this request, cancel the request now.
+Cancel Deactivation
+If you do not cancel this request, your account will be deactivated and all your email data will be lost.
+Sincerely,
+Your
+berkeley.edu
+Internet Team

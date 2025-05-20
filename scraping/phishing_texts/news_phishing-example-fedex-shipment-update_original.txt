@@ -1,0 +1,20 @@
+Fed
+Ex
+From:
+"
+FedEx.
+" <
+xxxxxx@berkeley.edu
+>
+To
+:
+Date
+:  Tue, Jan 3, 2017
+Fed
+Ex
+Dear Customer,
+We could not deliver your item.
+You can review and print complete details of shipping duty on your order.
+Thanks
+PDF Attachment:
+update_Form.pdf

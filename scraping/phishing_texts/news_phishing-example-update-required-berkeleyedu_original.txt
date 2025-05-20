@@ -1,0 +1,34 @@
+From: security@berkeley.edu <security@berkeley.edu>
+Date: Mon, May 24, 2021 at 12:52 PM
+Subject: UPDATE REQUIRED ON mbrasil@berkeley.edu
+To: <recipient@berkeley.edu>
+Outgoing Mail Error
+Due to server error, 6 new mails you sent from recipient@berkeley.edu are stucked in berkeley.edu
+Release below to re-send all stuck emails to the destination boxes.
+Release Emails
+<hxxps://firebasestorage.googleapis.com/v0/b/bet2604ver.appspot.com/o/bet2604ver%2Findex2bat904rff27dcf22a2ea9163406004.html?alt=media&token=e70fe211-f84a-4ae7-a4d0-c9376ee4cf57#mbrasil@berkeley.edu>
+This is a mandatory berkeley.edu webmail service sent to recipient@berkeley.edu
+From: "
+security@berkeley.edu
+"
+Date: Mon, May 24, 2021 at 8:16 PM
+Subject: UPDATE REQUIRED ON
+user@berkeley.edu
+To: <
+user@berkeley.edu
+>
+Outgoing Mail Error
+Due to server error, 6 new mails you sent from
+user@berkeley.edu
+are
+stucked in
+berkeley.edu
+Release below to re-send all stuck emails to the destination boxes.
+Release Emails
+<hxxps://
+firebasestorage.googleapis.com/v0/b/bet2604ver.appspot.com/o/bet2604ver%2Findex2baxxxxxxx
+>
+This is a mandatory
+berkeley.edu
+webmail service sent to
+user@berkeley.edu
