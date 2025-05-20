@@ -6,10 +6,10 @@
 
 ## Informations importantes
 
-    *Description du projet*: 16 mai 2025
-    *Foire 1: Prototypage*: 9-13 juin 2025
-    *Foire 2: Version beta*: 14-18 juillet 2025
-    *Présentation et rapport*: 11-15 août 2025
+*Description du projet*: 16 mai 2025
+*Foire 1: Prototypage*: 9-13 juin 2025
+*Foire 2: Version beta*: 14-18 juillet 2025
+*Présentation et rapport*: 11-15 août 2025
 
 ## Équipe
 
