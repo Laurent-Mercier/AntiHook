@@ -6,7 +6,6 @@
 
 ## Informations importantes
 
-!!! info "Dates importantes"
     - **Description du projet** : 16 mai 2025
     - **Foire 1: Prototypage** : 9-13 juin 2025
     - **Foire 2: Version beta** : 14-18 juillet 2025
@@ -49,5 +48,4 @@ Objectifs spécifiques:
 
 ## Échéancier
 
-!!! info
-    Le suivi complet du projet est disponible sur [le site web](https://laurent-mercier.github.io/IFT3150-site-web/).
+Le suivi complet du projet est disponible sur [le site web](https://laurent-mercier.github.io/IFT3150-site-web/).
