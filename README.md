@@ -56,4 +56,4 @@ Pour lancer le prototype, il suffit d'aller dans le dossier web-extension et lan
 
 ```uvicorn phishing_api:app --reload --port 8000```
 
-Ensuite, vous devez importer l'extension web dans l'url [extensions](about:debugging#/runtime/this-firefox) dans votre browser avec le fichier manifest.json (fonctionne pour firefox en ce moment). 
+Ensuite, vous devez importer l'extension web dans l'url `about:debugging#/runtime/this-firefox` dans votre browser avec le fichier manifest.json (fonctionne pour firefox en ce moment). 
