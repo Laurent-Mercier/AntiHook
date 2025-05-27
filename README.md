@@ -49,3 +49,11 @@ Objectifs spécifiques:
 ## Échéancier
 
 Le suivi complet du projet est disponible sur [le site web](https://laurent-mercier.github.io/IFT3150-site-web/).
+
+## Prototype
+
+Pour lancer le prototype, il suffit d'aller dans le dossier web-extension et lancer la commande:
+
+```uvicorn phishing_api:app --reload --port 8000```
+
+Ensuite, vous devez importer l'extension web dans l'url [extensions](about:debugging#/runtime/this-firefox) dans votre browser avec le fichier manifest.json (fonctionne pour firefox en ce moment). 
