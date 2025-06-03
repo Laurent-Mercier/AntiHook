@@ -8,23 +8,30 @@ browser.runtime.onMessage.addListener(async (msg, sender) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ image: dataUrl })
       });
+
       const result = await response.json();
+
       if (result.error) {
         browser.notifications.create({
-            type: "basic",
-            iconUrl: "icon.png",
-            title: "Error",
-            message: result.error
+          type: "basic",
+          iconUrl: "icon.png",
+          title: "Error",
+          message: result.error
         });
         return;
       }
+
       const isPhishing = result.is_phishing;
-      console.log("Extracted text:", result.extracted_text);
+      const confidence = (result.confidence * 100).toFixed(2); // percentage
+
+      const message = isPhishing
+        ? `⚠️ Phishing Detected! Confidence: ${confidence}%`
+        : `✅ Email looks safe. Confidence: ${confidence}%`;
       browser.notifications.create({
         type: "basic",
         iconUrl: "icon.png",
         title: "Phishing Check",
-        message: isPhishing ? "⚠️ Phishing Email Detected!" : "✅ Email looks safe"
+        message: message
       });
     });
   }
