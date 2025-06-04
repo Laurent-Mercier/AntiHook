@@ -22,7 +22,7 @@ browser.runtime.onMessage.addListener(async (msg, sender) => {
       }
 
       const isPhishing = result.is_phishing;
-      const confidence = (result.confidence * 100).toFixed(2); // percentage
+      const confidence = isPhishing?(result.confidence * 100).toFixed(2):(100-(result.confidence * 100)).toFixed(2); // percentage
 
       const message = isPhishing
         ? `⚠️ Phishing Detected! Confidence: ${confidence}%`
