@@ -8,6 +8,8 @@ import pytesseract
 import joblib
 import re
 from fastapi.middleware.cors import CORSMiddleware
+from deep_translator import GoogleTranslator
+from langdetect import detect
 
 # Words picked up by OCR in Outlook that are not relevant.
 OUTLOOK_NOISE = [
@@ -74,28 +76,33 @@ app.add_middleware(
 @app.post("/predict")
 async def predict(req: ImageRequest):
     try:
-        # Strips any header like "data:image/png;base64,"
+        # Decode image
         _, _, base64_data = req.image.partition(',')
         image_data = base64.b64decode(base64_data)
         image = Image.open(io.BytesIO(image_data))
 
-        # OCR.
+        # OCR
         full_text = pytesseract.image_to_string(image)
-        print("\n--- OCR Full Extracted Text ---\n")
-        print(full_text[:1000])
-
-        # Extract email body.
         cleaned_text = extract_email_body(full_text)
-        print("\n--- Extracted Email Body (Filtered) ---\n")
-        print(cleaned_text[:1000])
+
+        # Language detection
+        try:
+            detected_lang = detect(cleaned_text)
+        except Exception:
+            detected_lang = "unknown"
+
+        print(f"\n--- Detected Language: {detected_lang} ---")
+
+        if detected_lang == "fr":
+            print("\n--- Translating from French to English ---")
+            text_for_model = GoogleTranslator(source='fr', target='en').translate(cleaned_text)
+        else:
+            text_for_model = cleaned_text
 
         # Predict
-        X = vectorizer.transform([cleaned_text])
+        X = vectorizer.transform([text_for_model])
         prediction = model.predict(X)[0]
-        proba = model.predict_proba(X)[0][1]  # confidence it's phishing
-
-        # Print confidence.
-        print(f"\n--- Prediction: {'Phishing' if prediction else 'Safe'} (Confidence: {proba:.4f}) ---\n")
+        proba = model.predict_proba(X)[0][1]
 
         return {
             "is_phishing": bool(proba > 0.8),
@@ -104,3 +111,4 @@ async def predict(req: ImageRequest):
 
     except Exception as e:
         return {"error": str(e)}
+
