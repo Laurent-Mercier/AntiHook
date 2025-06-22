@@ -1,38 +1,39 @@
 browser.runtime.onMessage.addListener(async (msg, sender) => {
-  if (msg.action === "start_check") {
-    const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
-
-    browser.tabs.captureVisibleTab(tab.windowId, { format: "png" }).then(async (dataUrl) => {
-      const response = await fetch("http://127.0.0.1:8000/predict", {
+  if (msg.action === "analyze_email" && msg.html) {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/analyze_html", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ image: dataUrl })
+        body: JSON.stringify({ html: msg.html })
       });
+
+      if (!response.ok) throw new Error("Server error");
 
       const result = await response.json();
 
-      if (result.error) {
-        browser.notifications.create({
-          type: "basic",
-          iconUrl: "icon.png",
-          title: "Error",
-          message: result.error
-        });
-        return;
-      }
+      if (result.error) throw new Error(result.error);
 
       const isPhishing = result.is_phishing;
-      const confidence = isPhishing?(result.confidence * 100).toFixed(2):(100-(result.confidence * 100)).toFixed(2); // percentage
+      const confidence = isPhishing
+        ? (result.confidence * 100).toFixed(2)
+        : (100 - result.confidence * 100).toFixed(2);
 
-      const message = isPhishing
-        ? `⚠️ Phishing Detected! Confidence: ${confidence}%`
-        : `✅ Email looks safe. Confidence: ${confidence}%`;
       browser.notifications.create({
         type: "basic",
         iconUrl: "icon.png",
         title: "Phishing Check",
-        message: message
+        message: isPhishing
+          ? `⚠️ Phishing Detected! (Confidence: ${confidence}%)`
+          : `✅ Safe Email (Confidence: ${confidence}%)`,
       });
-    });
+    } catch (err) {
+      console.error("Phishing detection failed:", err);
+      browser.notifications.create({
+        type: "basic",
+        iconUrl: "icon.png",
+        title: "Error",
+        message: `Phishing analysis failed: ${err.message}`
+      });
+    }
   }
 });

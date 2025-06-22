@@ -2,14 +2,14 @@
   "manifest_version": 2,
   "name": "Phishing Email Detector",
   "version": "1.0",
-  "description": "Detects if an email is a phishing attempt using a screenshot.",
+  "description": "Detects if an email is a phishing attempt by analyzing its content.",
   "permissions": [
-  "http://localhost:8000/*",
-  "http://127.0.0.1:8000/*",
-  "activeTab",
-  "tabs",
-  "notifications",
-  "<all_urls>"
+    "http://localhost:8000/*",
+    "http://127.0.0.1:8000/*",
+    "activeTab",
+    "tabs",
+    "notifications",
+    "<all_urls>"
   ],
   "background": {
     "scripts": ["background.js"]
@@ -17,5 +17,16 @@
   "browser_action": {
     "default_icon": "icon.png",
     "default_popup": "popup.html"
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://outlook.live.com/*",
+        "https://outlook.office.com/*",
+        "https://mail.google.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
 }
