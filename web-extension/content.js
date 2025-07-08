@@ -20,9 +20,10 @@ browser.runtime.onMessage.addListener((msg, sender) => {
 
     if (!html) {
       alert("⚠️ Could not find the email content. Are you viewing an email?");
-      return;
     }
 
-    browser.runtime.sendMessage({ action: "analyze_email", html });
+    // 🔧 FIX: send result back to the popup
+    return Promise.resolve(html);
   }
 });
+

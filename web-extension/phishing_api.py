@@ -125,7 +125,7 @@ async def analyze_html(req: HtmlRequest):
 
         return {
             "is_phishing": is_phishing,
-            "confidence": round(float(proba), 4),
+            "confidence": float(proba),
             "language": detected_lang,
             "explanation": explanation
         }
