@@ -52,8 +52,15 @@ Le suivi complet du projet est disponible sur [le site web](https://laurent-merc
 
 ## Prototype
 
-Pour lancer le prototype, il suffit d'aller dans le dossier web-extension et lancer la commande:
+Pour lancer le prototype, il suffit d'aller d'être dans le dossier parent et lancer les commandes suivantes:
 
-```uvicorn phishing_api:app --reload --port 8000```
+```docker-compose build```
+```docker-compose up```
 
-Ensuite, vous devez importer l'extension web dans l'url `about:debugging#/runtime/this-firefox` dans votre browser avec le fichier manifest.json (fonctionne pour firefox en ce moment). 
+### Firefox ou browser basé sur firefox
+
+Ensuite, vous devez importer l'extension web en tant que "temporary add-on" dans l'url `about:debugging#/runtime/this-firefox` dans votre browser avec le fichier manifest.json qui se trouve dans extensions/firefox.
+
+### Chrome ou browser basé sur chrome
+
+Ensuite, vous devez importer l'extension web en tant que "unpacked extension" dans l'url `chrome://extensions/` dans votre browser en spécifiant le dossier extensions/chrome. 

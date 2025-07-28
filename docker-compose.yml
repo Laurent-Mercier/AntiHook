@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: antihook_api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    # if you want to pick up code changes locally (dev only):
+    # volumes:
+    #   - ./:/app:ro
+    environment:
+      # tell uvicorn to reload on code changes if you volume‑mount
+      UVICORN_RELOAD: "true"
+    command: >
+      uvicorn api.main:app
+      --host 0.0.0.0
+      --port 8000
+      ${UVICORN_RELOAD:+--reload}

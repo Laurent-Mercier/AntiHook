@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "AntiHook",
+  "version": "1.0",
+  "description": "Detects if an email is a phishing attempt by analyzing its content.",
+
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "notifications",
+    "scripting"
+  ],
+
+  "host_permissions": [
+    "https://mail.google.com/*",
+    "https://outlook.live.com/*",
+    "https://outlook.office.com/*",
+    "http://localhost:8000/*",
+    "http://127.0.0.1:8000/*"
+  ],
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://outlook.live.com/*",
+        "https://outlook.office.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ]
+}
+
+
+
+
+

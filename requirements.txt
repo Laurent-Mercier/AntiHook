@@ -1,0 +1,22 @@
+# Web framework
+fastapi==0.115.12
+uvicorn[standard]==0.34.2
+
+# Data translation & language detection
+deep-translator==1.11.4
+langdetect==1.0.9
+
+# HTML parsing
+beautifulsoup4==4.13.4
+
+# Model persistence & numeric
+joblib==1.5.0
+numpy==2.2.5
+scipy==1.16.0
+scikit-learn==1.6.1
+
+# SHAP explanations
+shap==0.48.0
+
+# Plotting (for any SHAP or debug charts)
+matplotlib==3.10.1
