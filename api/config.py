@@ -5,7 +5,7 @@ from typing import List, Dict
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-# Model & vectorizer file locations
+# Model & vectorizer file locations.
 TEXT_MODEL_PATHS: Dict[str, str] = {
     "random_forest":           os.path.join(BASE_DIR, "models", "random_forest.pkl"),
     "random_forest_tuned":     os.path.join(BASE_DIR, "models", "random_forest_tuned.pkl"),
@@ -20,7 +20,7 @@ LINK_MODEL_PATHS: Dict[str, str] = {
 VECTORIZER_PATH      = os.path.join(BASE_DIR, "models", "email_vectorizer.pkl")
 LINK_VECTORIZER_PATH = os.path.join(BASE_DIR, "models", "link_vectorizer.pkl")
 
-# SHAP background seed texts
+# SHAP background seed texts.
 SHAP_BACKGROUND_TEXTS: List[str] = [
     "dear customer your account has been suspended",
     "click here to verify your identity",
@@ -31,7 +31,7 @@ SHAP_BACKGROUND_TEXTS: List[str] = [
     "please confirm your address"
 ]
 
-# Ensemble & heuristic settings
+# Ensemble & heuristic settings.
 TEXT_MODEL_WEIGHTS = {
     "random_forest":           2.0,
     "random_forest_tuned":     1.0,
@@ -57,11 +57,12 @@ SENSITIVE_SUBSTRINGS = {
     "email", "courriel", "www", "http", "https"
 }
 
-# Text‐cleaning constants
+# Text‐cleaning constants.
 PLACEHOLDER_TOKENS = {"<MONEY>", "<TIME>", "<EMAIL>", "<PHONE>", "<PERCENT>", "<URL>", "<DATE>"}
+
 BANNER_PATTERNS = [
     r"^avis:\s*courriel externe\.\s*soyez vigilant\.*",
-    r"^attention:\s*external email.*",
+    r"^attention:\s*external email.*?\.\s*"
 ]
 SINGLE_LETTER_WHITELIST = {"a", "à", "e", "y", "i", "o"}
 STOPWORDS = set()
@@ -74,7 +75,7 @@ MANUAL_TRANSLATIONS = {
     "email":    "courriel",
 }
 
-# Regex for placeholders & redaction
+# Regex for placeholders & redaction.
 PHONE_RE          = r"(?:(?:\+?\d{1,3}[\s.\-]?)?(?:\(?\d{2,4}\)?[\s.\-]?){2,5}\d{2,6})"
 CURRENCY_RE       = r"(?:(?<=\s)|^)(?:€|eur|\$|usd|cad|chf|£)\s?\d+[.,]?\d*(?:\s?(?:€|eur|\$|usd|cad|chf|£))?(?=\s|$)"
 CURRENCY_TRAIL_RE = r"\d+[.,]?\d*\s?(?:€|eur|\$|usd|cad|chf|£)"

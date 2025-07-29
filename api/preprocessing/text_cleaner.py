@@ -3,6 +3,7 @@
 import re
 import html
 import unicodedata
+from difflib import get_close_matches
 from deep_translator import GoogleTranslator
 from typing import Dict, List, Tuple, Any
 from api.config import (
@@ -18,7 +19,10 @@ from api.config import (
     EMAIL_RE,
     DATE_RE,
     PLACEHOLDER_TOKENS,
+    BASE_THRESHOLD,
+    MANUAL_TRANSLATIONS,
 )
+import traceback
 
 def normalize_unicode(text: str) -> str:
     """Normalize Unicode to NFC for consistent accent handling."""
@@ -38,9 +42,9 @@ def join_fragmented_words(text: str) -> str:
     Reassemble words split across newlines or as spaced letters.
     E.g. "p r o g r a m m e" → "programme", "pro\ngram" → "program".
     """
-    # letter + newline + letter → join
+    # letter + newline + letter → join.
     text = re.sub(r"([A-Za-zÀ-ÖØ-öø-ÿ])\n+([A-Za-zÀ-ÖØ-öø-ÿ])", r"\1\2", text)
-    # collapse sequences of single letters
+    # collapse sequences of single letters.
     def collapse(m: re.Match) -> str:
         return "".join(m.group(0).split())
     return re.sub(r"(?:\b[A-Za-zÀ-ÖØ-öø-ÿ]\b\s+){2,}\b[A-Za-zÀ-ÖØ-öø-ÿ]\b",
@@ -87,10 +91,10 @@ def clean_text(raw: str) -> str:
     s = join_fragmented_words(s)
     s = placeholder_substitutions(s)
     s = s.lower()
-    # restore uppercase placeholders
+    # restore uppercase placeholders.
     for ph in PLACEHOLDER_TOKENS:
         s = s.replace(ph.lower(), ph)
-    # strip unwanted chars & collapse whitespace
+    # strip unwanted chars & collapse whitespace.
     s = re.sub(r"[^\w\s<>\-.,]", " ", s)
     s = re.sub(r"\d{8,}", " ", s)
     s = re.sub(r"(.)\1{5,}", r"\1", s)
@@ -114,7 +118,7 @@ def fuzzy_reverse_lookup(word_en: str, original_text_fr: str) -> str:
         match = get_close_matches(guess, candidates, n=1, cutoff=0.85)
         return match[0] if match else guess
     except Exception:
-        return word_en
+       return word_en
 
 def adaptive_threshold(_probs: List[float]) -> float:
     """

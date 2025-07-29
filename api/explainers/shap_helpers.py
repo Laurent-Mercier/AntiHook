@@ -6,7 +6,6 @@ from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LogisticRegression
 from typing import Dict, Any, List
 from ..config import SENSITIVE_SUBSTRINGS
-from ..preprocessing.text_cleaner import normalize_unicode, strip_banners  # if needed
 from deep_translator import GoogleTranslator
 from difflib import get_close_matches
 

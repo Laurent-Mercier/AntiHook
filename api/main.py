@@ -11,7 +11,7 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Allow CORS from anywhere (adjust in prod)
+# Allow CORS from anywhere.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -20,5 +20,5 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount our analyze endpoint
+# Mount the analyze endpoint.
 app.include_router(analyze_router, prefix="", tags=["analysis"])
