@@ -43,14 +43,9 @@ LINK_MODEL_WEIGHTS = {
     "link_logistic_regression":    1.5,
     "link_hist_gradient_boosting": 2.5,
 }
-BASE_THRESHOLD      = 0.55
+BASE_THRESHOLD      = 0.5
 MIN_CONSENSUS_MODELS = 2
 CONSENSUS_BAND       = 0.05
-
-HIGH_RISK_KEYWORDS = {
-    "password", "verify", "connexion", "compte",
-    "login", "payer", "paiement", "update"
-}
 
 SENSITIVE_SUBSTRINGS = {
     "gmail", "hotmail", "outlook", "tel", "phone",

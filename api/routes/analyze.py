@@ -39,9 +39,8 @@ from ..inference.ensemble import (
     load_models,
     weighted_vote,
     consensus_adjustment,
-    apply_gray_band_rule,
-    apply_money_only_rule,
 )
+
 from ..explainers.shap_helpers import aggregate_shap
 
 router = APIRouter()
@@ -121,10 +120,6 @@ async def analyze_html(req: HtmlRequest):
         original_text_fr=fr_source,
         detected_lang=lang,
     )
-
-    # 8) Heuristic tweaks
-    is_phish = apply_gray_band_rule(is_phish, final_prob, cleaned)
-    is_phish = apply_money_only_rule(is_phish, final_prob, explanation)
 
     return {
         "is_phishing": bool(is_phish),

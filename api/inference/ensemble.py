@@ -11,7 +11,6 @@ from ..config import (
     BASE_THRESHOLD,
     MIN_CONSENSUS_MODELS,
     CONSENSUS_BAND,
-    HIGH_RISK_KEYWORDS,
 )
 
 def load_models(paths: Dict[str, str]) -> Dict[str, Any]:
@@ -66,37 +65,3 @@ def consensus_adjustment(
         if base_decision and count < MIN_CONSENSUS_MODELS:
             return False
     return base_decision
-
-def apply_gray_band_rule(
-    decision: bool,
-    ensemble_prob: float,
-    cleaned_text: str
-) -> bool:
-    """
-    If in [0.5, 0.7) and none of HIGH_RISK_KEYWORDS in text,
-    downgrade to False.
-    """
-    if decision and 0.5 <= ensemble_prob < 0.7:
-        if not any(k in cleaned_text.lower() for k in HIGH_RISK_KEYWORDS):
-            return False
-    return decision
-
-def apply_money_only_rule(
-    decision: bool,
-    ensemble_prob: float,
-    explanation: list[dict]
-) -> bool:
-    """
-    If top‑3 tokens are all money‑like and prob<0.75,
-    downgrade to False.
-    """
-    if decision and explanation:
-        top3 = explanation[:3]
-        money_only = all(
-            tok["word"].lower().startswith("argent")
-            or tok["word"].lower() in {"money", "<money>"}
-            for tok in top3
-        )
-        if money_only and ensemble_prob < 0.75:
-            return False
-    return decision
