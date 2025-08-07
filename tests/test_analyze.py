@@ -65,8 +65,6 @@ def patch_analyze_module(monkeypatch):
     # Patch voting and heuristics
     monkeypatch.setattr(mod, "weighted_vote", dummy_weighted_vote)
     monkeypatch.setattr(mod, "consensus_adjustment", dummy_consensus_adjustment)
-    monkeypatch.setattr(mod, "apply_gray_band_rule", dummy_gray)
-    monkeypatch.setattr(mod, "apply_money_only_rule", dummy_money)
     monkeypatch.setattr(mod, "aggregate_shap", dummy_aggregate_shap)
 
     # Ensure SHAP background has matching dimension

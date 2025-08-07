@@ -7,8 +7,6 @@ from sklearn.base import BaseEstimator
 from api.inference.ensemble import (
     weighted_vote,
     consensus_adjustment,
-    apply_gray_band_rule,
-    apply_money_only_rule,
 )
 
 class DummyModel(BaseEstimator):
@@ -56,42 +54,3 @@ def test_consensus_adjustment_outside_band():
     threshold = 0.5
     # ensemble_prob = 0.6 outside band => unchanged
     assert consensus_adjustment(base, 0.6, per_model, threshold)
-
-def test_apply_gray_band_rule_downgrade():
-    # in gray band [0.5–0.7) and no high-risk keywords => False
-    assert not apply_gray_band_rule(True, 0.6, "nothing risky here")
-
-def test_apply_gray_band_rule_keep():
-    # in gray band but text contains 'password' => stays True
-    assert apply_gray_band_rule(True, 0.6, "please update your password")
-
-def test_apply_gray_band_rule_outside_band():
-    # outside band => unchanged
-    assert apply_gray_band_rule(True, 0.8, "nothing risky here")
-
-def test_apply_money_only_rule_downgrade():
-    explanation = [
-        {"word": "money", "impact": 1.0},
-        {"word": "argent", "impact": 0.5},
-        {"word": "<money>", "impact": 0.2},
-    ]
-    # below 0.75 => downgrade
-    assert not apply_money_only_rule(True, 0.7, explanation)
-
-def test_apply_money_only_rule_keep_high_confidence():
-    explanation = [
-        {"word": "money", "impact": 1.0},
-        {"word": "argent", "impact": 0.5},
-        {"word": "<money>", "impact": 0.2},
-    ]
-    # above 0.75 => stays True
-    assert apply_money_only_rule(True, 0.8, explanation)
-
-def test_apply_money_only_rule_non_money_top3():
-    # if any of top3 is non‐money, stays True
-    explanation = [
-        {"word": "other", "impact": 1.0},
-        {"word": "argent", "impact": 0.5},
-        {"word": "<money>", "impact": 0.2},
-    ]
-    assert apply_money_only_rule(True, 0.7, explanation)
